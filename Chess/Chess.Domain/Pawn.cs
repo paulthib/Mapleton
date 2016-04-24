@@ -13,10 +13,7 @@ namespace Chess.Domain
         {
             return (PieceColor == PieceColor.Black ? -1 : 1);
         }
-        private int HomeYCoordinate()
-        {
-            return (PieceColor == PieceColor.Black ? 6 : 1);
-        }
+
         private bool IsAtHomeCoordinate()
         {
             return _yCoordinate == (PieceColor == PieceColor.Black ? 6 : 1);

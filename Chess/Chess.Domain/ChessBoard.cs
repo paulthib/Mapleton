@@ -30,16 +30,17 @@ namespace Chess.Domain
         public void Move(IChessPiece piece, int toXCoordinate, int toYCoordinate)
         {
             if (IsLegalBoardPosition(toXCoordinate, toYCoordinate)
-                && ( piece.JumpingAllowed || PathIsClear(piece, toXCoordinate, toYCoordinate)))
+                && ( piece.JumpingAllowed || IsMovePathClear(piece, toXCoordinate, toYCoordinate)))
             {
                 Remove(piece);
+                // TODO - before moving the piece, "capture" the piece that is in the TO location (if any)
                 Add(piece, toXCoordinate, toYCoordinate);
-                moveCounter++;
-                piece.LastMoveNumber = moveCounter;
+
+                piece.LastMoveNumber = ++moveCounter;
             }
         }
 
-        private bool PathIsClear(IChessPiece piece, int toXCoordinate, int toYCoordinate)
+        private bool IsMovePathClear(IChessPiece piece, int toXCoordinate, int toYCoordinate)
         {
             var yDirection = CalcDirection(toYCoordinate, piece.YCoordinate);
             var xDirection = CalcDirection(toXCoordinate, piece.XCoordinate);
@@ -56,10 +57,10 @@ namespace Chess.Domain
                 x += xDirection;
             }
 
-            //TODO - this shoudl be an indicator, not a type check
+            //TODO - this should be an indicator, not a type-specific check
             if (piece.GetType() == typeof(Pawn))
             {
-                //check if destination has a piece
+                //if destination has a piece, reject this move
                 if (pieces[toXCoordinate, toYCoordinate] != null)
                 {
                     return false;

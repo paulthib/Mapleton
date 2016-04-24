@@ -53,7 +53,8 @@ namespace Chess.Domain
 
         public virtual void Capture(int newX, int newY)
         {
-           Move(newX, newY);
+            //for most pieces, a move implicitly captures
+            Move(newX, newY);
         }
 
         protected virtual string CurrentPositionAsString()

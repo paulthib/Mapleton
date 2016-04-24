@@ -6,7 +6,7 @@ namespace Chess.Domain
     [TestFixture]
     public class When_creating_a_chess_board
     {
-        private ChessBoard _chessBoard;
+        private IChessBoard _chessBoard;
 
         [SetUp]
         public void SetUp()
@@ -154,7 +154,7 @@ namespace Chess.Domain
         }
 
         [Test]
-        public void _31_illegal_move_blocked()
+        public void _31_illegal_move_blocked_by_opponent()
         {
             _chessBoard.Add(_pawn, 6, 6);
             _chessBoard.Add(_opponent, 6, 4);
@@ -168,8 +168,8 @@ namespace Chess.Domain
     [TestFixture]
     public class When_using_a_white_pawn_and
     {
-        private ChessBoard _chessBoard;
-        private Pawn _pawn;
+        private IChessBoard _chessBoard;
+        private IChessPiece _pawn;
 
         [SetUp]
         public void SetUp()
@@ -238,8 +238,8 @@ namespace Chess.Domain
     public class When_a_black_pawn_vs_white_pawn
     {
         private IChessBoard _chessBoard;
-        private Pawn _pawn;
-        private Pawn _opponent;
+        private IChessPiece _pawn;
+        private IChessPiece _opponent;
 
         [SetUp]
         public void SetUp()
