@@ -166,6 +166,15 @@ namespace Chess.Domain
         }
 
         [Test]
+        public void _12_making_an_illegal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_6_and_Y_eqauls_0_should_not_move_the_pawn()
+        {
+            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _pawn.Move(MovementType.Move, 6, 0);
+            Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
+            Assert.That(_pawn.YCoordinate, Is.EqualTo(1));
+        }
+
+        [Test]
         public void _20_making_a_legal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_6_and_Y_eqauls_2_should_move_the_pawn()
         {
             _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
@@ -173,6 +182,16 @@ namespace Chess.Domain
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(2));
         }
+
+        [Test]
+        public void _21_making_a_legal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_6_and_Y_eqauls_3_should_move_the_pawn()
+        {
+            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _pawn.Move(MovementType.Move, 6, 3);
+            Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
+            Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
+        }
+
 
     }
 

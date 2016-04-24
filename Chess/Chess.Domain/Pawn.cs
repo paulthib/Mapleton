@@ -2,45 +2,52 @@
 
 namespace Chess.Domain
 {
-    public class Pawn
+    public class Pawn : ChessPiece
     {
-        private ChessBoard _chessBoard;
-        private int _xCoordinate;
-        private int _yCoordinate;
-        private PieceColor _pieceColor;
-        
-        public ChessBoard ChessBoard
+       
+        public Pawn(PieceColor pieceColor) : base(pieceColor)
         {
-            get { return _chessBoard; }
-            set { _chessBoard = value; }
         }
 
-        public int XCoordinate
+        private int MovementDirection()
         {
-            get { return _xCoordinate; }
-            set { _xCoordinate = value; }
+            return (PieceColor == PieceColor.Black ? -1 : 1);
         }
-        
-        public int YCoordinate
+        private int HomeYCoordinate()
         {
-            get { return _yCoordinate; }
-            set { _yCoordinate = value; }
+            return (PieceColor == PieceColor.Black ? 6 : 1);
         }
-
-        public PieceColor PieceColor
+        private bool IsAtHomeCoordinate()
         {
-            get { return _pieceColor; }
-            private set { _pieceColor = value; }
+            return _yCoordinate == (PieceColor == PieceColor.Black ? 6 : 1);
         }
 
-        public Pawn(PieceColor pieceColor)
-        {
-            _pieceColor = pieceColor;
-        }
 
-        public void Move(MovementType movementType, int newX, int newY)
+        public override void Move(MovementType movementType, int newX, int newY)
         {
-            throw new NotImplementedException("Need to implement Pawn.Move()");
+            switch (movementType)
+            {
+                case MovementType.Move:
+                    var yMovement = (newY - _yCoordinate) * MovementDirection();
+                    if (newX == _xCoordinate && yMovement > 0)
+                    {
+                        if ((IsAtHomeCoordinate() && (yMovement <= 2))
+                            || (newY == _yCoordinate +  MovementDirection() ))
+                        {
+                            _yCoordinate = newY;
+                        }
+                    }
+                    break;
+                case MovementType.Capture:
+                    if (newX == _xCoordinate +1 && newY == _yCoordinate + (1 * MovementDirection()))
+                    {
+                        _yCoordinate = newY;
+                        _xCoordinate = newX;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override string ToString()
@@ -48,7 +55,7 @@ namespace Chess.Domain
             return CurrentPositionAsString();
         }
 
-        protected string CurrentPositionAsString()
+        protected override string CurrentPositionAsString()
         {
             return string.Format("Current X: {1}{0}Current Y: {2}{0}Piece Color: {3}", Environment.NewLine, XCoordinate, YCoordinate, PieceColor);
         }
