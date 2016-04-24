@@ -7,12 +7,15 @@ namespace Chess.Domain
 {
     public interface IChessPiece
     {
-        void Move(MovementType movementType, int newX, int newY);
+        void Move(int newX, int newY);
+        void Capture(int newX, int newY);
+
         int XCoordinate { get; set; }
         int YCoordinate { get; set; }
         int LastMoveNumber { get; set; }
         IChessBoard ChessBoard { get; set; }
         // setter is private
         PieceColor PieceColor { get;  }
+        bool JumpingAllowed { get; }
     }
 }

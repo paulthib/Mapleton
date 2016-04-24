@@ -35,16 +35,25 @@ namespace Chess.Domain
             private set { _pieceColor = value; }
         }
 
-        public ChessPiece(PieceColor pieceColor)
+        public bool JumpingAllowed { get; private set; }
+
+        public ChessPiece(PieceColor pieceColor, bool jumpingAllowed)
         {
             _pieceColor = pieceColor;
+            JumpingAllowed = jumpingAllowed;
+            LastMoveNumber = 0;
         }
 
-        public abstract void Move(MovementType movementType, int newX, int newY);
+        public abstract void Move(int newX, int newY);
 
         public override string ToString()
         {
             return CurrentPositionAsString();
+        }
+
+        public virtual void Capture(int newX, int newY)
+        {
+           Move(newX, newY);
         }
 
         protected virtual string CurrentPositionAsString()

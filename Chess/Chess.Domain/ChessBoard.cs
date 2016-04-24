@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 
 namespace Chess.Domain
 {
@@ -17,7 +19,7 @@ namespace Chess.Domain
 
         public void Add(IChessPiece piece, int xCoordinate, int yCoordinate)
         {
-            //removed argument pieceColor since the piece knows its coloe
+            //removed argument pieceColor since the piece knows its color
             piece.XCoordinate = xCoordinate;
             piece.YCoordinate = yCoordinate;
             piece.ChessBoard = this;
@@ -27,13 +29,52 @@ namespace Chess.Domain
 
         public void Move(IChessPiece piece, int toXCoordinate, int toYCoordinate)
         {
-            if (IsLegalBoardPosition(toXCoordinate, toYCoordinate))
+            if (IsLegalBoardPosition(toXCoordinate, toYCoordinate)
+                && ( piece.JumpingAllowed || PathIsClear(piece, toXCoordinate, toYCoordinate)))
             {
                 Remove(piece);
                 Add(piece, toXCoordinate, toYCoordinate);
                 moveCounter++;
                 piece.LastMoveNumber = moveCounter;
             }
+        }
+
+        private bool PathIsClear(IChessPiece piece, int toXCoordinate, int toYCoordinate)
+        {
+            var yDirection = CalcDirection(toYCoordinate, piece.YCoordinate);
+            var xDirection = CalcDirection(toXCoordinate, piece.XCoordinate);
+
+            var y = piece.YCoordinate + yDirection;
+            var x = piece.XCoordinate + xDirection;
+            while (y != toYCoordinate && (xDirection == 0 || x != toXCoordinate))
+            {
+                if (pieces[x, y] != null)
+                {
+                    return false;
+                }
+                y += yDirection;
+                x += xDirection;
+            }
+
+            //TODO - this shoudl be an indicator, not a type check
+            if (piece.GetType() == typeof(Pawn))
+            {
+                //check if destination has a piece
+                if (pieces[toXCoordinate, toYCoordinate] != null)
+                {
+                    return false;
+                }
+                
+            }
+            return true;
+        }
+
+        private int CalcDirection(int to, int from)
+        {
+            if (to == from)
+                return 0;
+            else
+                return to - from > 0 ? 1 : -1;
         }
 
         public void Capture(IChessPiece piece, int toXCoordinate, int toYCoordinate)
