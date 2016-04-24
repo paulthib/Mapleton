@@ -40,47 +40,9 @@ namespace Chess.Domain
             }
         }
 
-        private bool IsMovePathClear(IChessPiece piece, int toXCoordinate, int toYCoordinate)
-        {
-            var yDirection = CalcDirection(toYCoordinate, piece.YCoordinate);
-            var xDirection = CalcDirection(toXCoordinate, piece.XCoordinate);
-
-            var y = piece.YCoordinate + yDirection;
-            var x = piece.XCoordinate + xDirection;
-            while (y != toYCoordinate && (xDirection == 0 || x != toXCoordinate))
-            {
-                if (pieces[x, y] != null)
-                {
-                    return false;
-                }
-                y += yDirection;
-                x += xDirection;
-            }
-
-            //TODO - this should be an indicator, not a type-specific check
-            if (piece.GetType() == typeof(Pawn))
-            {
-                //if destination has a piece, reject this move
-                if (pieces[toXCoordinate, toYCoordinate] != null)
-                {
-                    return false;
-                }
-                
-            }
-            return true;
-        }
-
-        private int CalcDirection(int to, int from)
-        {
-            if (to == from)
-                return 0;
-            else
-                return to - from > 0 ? 1 : -1;
-        }
-
         public void Capture(IChessPiece piece, int toXCoordinate, int toYCoordinate)
         {
-            if (IsLegalBoardPosition(toXCoordinate, toYCoordinate) )
+            if (IsLegalBoardPosition(toXCoordinate, toYCoordinate))
             {
                 var opponentPiece = pieces[toXCoordinate, toYCoordinate];
 
@@ -96,6 +58,39 @@ namespace Chess.Domain
                 Remove(piece);
                 Add(piece, toXCoordinate, toYCoordinate);
             }
+        }
+
+
+        private bool IsMovePathClear(IChessPiece piece, int toXCoordinate, int toYCoordinate)
+        {
+            var yDirection = MovementDirection(toYCoordinate, piece.YCoordinate);
+            var xDirection = MovementDirection(toXCoordinate, piece.XCoordinate);
+
+            var y = piece.YCoordinate + yDirection;
+            var x = piece.XCoordinate + xDirection;
+            while ((yDirection == 0 || y != toYCoordinate) && (xDirection == 0 || x != toXCoordinate))
+            {
+                if (pieces[x, y] != null)
+                    return false;
+                y += yDirection;
+                x += xDirection;
+            }
+
+            //TODO - this should be an indicator, not a type-specific check
+            if (piece.GetType() == typeof(Pawn))
+            {
+                //if destination has a piece, reject this move
+                if (pieces[toXCoordinate, toYCoordinate] != null)
+                    return false;
+            }
+            return true;
+        }
+
+        private int MovementDirection(int to, int from)
+        {
+            if (to == from)
+                return 0;
+            return to - from > 0 ? 1 : -1;
         }
 
         private IChessPiece TakingEnPassant(IChessPiece piece, int toXCoordinate, int toYCoordinate)

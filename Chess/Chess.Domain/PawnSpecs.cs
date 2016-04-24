@@ -127,7 +127,7 @@ namespace Chess.Domain
         }
 
         [Test]
-        public void _31_legal_move_1()
+        public void _31_legal_move_1_space()
         {
             _chessBoard.Add(_pawn, 6, 6);
             _pawn.Move(6, 5);
@@ -136,7 +136,7 @@ namespace Chess.Domain
         }
 
         [Test]
-        public void _31_legal_move_2()
+        public void _31_legal_move_2_spaces()
         {
             _chessBoard.Add(_pawn, 6, 6);
             _pawn.Move(6, 4);
@@ -145,7 +145,7 @@ namespace Chess.Domain
         }
 
         [Test]
-        public void _31_illegal_move_too_far()
+        public void _31_illegal_pawn_move_too_far()
         {
             _chessBoard.Add(_pawn, 6, 6);
             _pawn.Move(6, 3);
@@ -154,7 +154,7 @@ namespace Chess.Domain
         }
 
         [Test]
-        public void _31_illegal_move_blocked_by_opponent()
+        public void _31_pawn_move_blocked_by_opponent()
         {
             _chessBoard.Add(_pawn, 6, 6);
             _chessBoard.Add(_opponent, 6, 4);
@@ -250,7 +250,7 @@ namespace Chess.Domain
         }
 
         [Test]
-        public void _31_black_vs_white()
+        public void _31_black_pawn_capture_white_pawn()
         {
             _chessBoard.Add(_pawn, 3, 6);
             _chessBoard.Add(_opponent, 4, 1);
