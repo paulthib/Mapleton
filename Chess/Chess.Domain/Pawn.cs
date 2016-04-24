@@ -34,15 +34,14 @@ namespace Chess.Domain
                         if ((IsAtHomeCoordinate() && (yMovement <= 2))
                             || (newY == _yCoordinate +  MovementDirection() ))
                         {
-                            _yCoordinate = newY;
+                            _chessBoard.Move(this, _xCoordinate, newY);
                         }
                     }
                     break;
                 case MovementType.Capture:
                     if (newX == _xCoordinate +1 && newY == _yCoordinate + (1 * MovementDirection()))
                     {
-                        _yCoordinate = newY;
-                        _xCoordinate = newX;
+                        _chessBoard.Capture(this, newX, newY);
                     }
                     break;
                 default:

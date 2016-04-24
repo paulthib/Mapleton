@@ -2,14 +2,16 @@
 
 namespace Chess.Domain
 {
-    public abstract class ChessPiece
+    public abstract class ChessPiece : IChessPiece
     {
-        protected ChessBoard _chessBoard;
+        protected IChessBoard _chessBoard;
         protected int _xCoordinate;
         protected int _yCoordinate;
         protected PieceColor _pieceColor;
-        
-        public ChessBoard ChessBoard
+
+        public int LastMoveNumber { get; set; }
+
+        public IChessBoard ChessBoard
         {
             get { return _chessBoard; }
             set { _chessBoard = value; }
@@ -38,9 +40,7 @@ namespace Chess.Domain
             _pieceColor = pieceColor;
         }
 
-        public virtual void Move(MovementType movementType, int newX, int newY)
-        {
-        }
+        public abstract void Move(MovementType movementType, int newX, int newY);
 
         public override string ToString()
         {

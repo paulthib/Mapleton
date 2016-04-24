@@ -79,8 +79,8 @@ namespace Chess.Domain
     [TestFixture]
     public class When_using_a_black_pawn_and
     {
-        private ChessBoard _chessBoard;
-        private Pawn _pawn;
+        private IChessBoard _chessBoard;
+        private IChessPiece _pawn;
 
         [SetUp]
         public void SetUp()
@@ -92,7 +92,7 @@ namespace Chess.Domain
         [Test]
         public void _01_placing_the_black_pawn_on_X_equals_6_and_Y_equals_3_should_place_the_black_pawn_on_that_place_on_the_board()
         {
-            _chessBoard.Add(_pawn, 6, 3, PieceColor.Black);
+            _chessBoard.Add(_pawn, 6, 3);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
         }
@@ -100,7 +100,7 @@ namespace Chess.Domain
         [Test]
         public void _10_making_an_illegal_move_by_placing_the_black_pawn_on_X_equals_6_and_Y_eqauls_3_and_moving_to_X_equals_7_and_Y_eqauls_3_should_not_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 3, PieceColor.Black);
+            _chessBoard.Add(_pawn, 6, 3);
             _pawn.Move(MovementType.Move, 7, 3);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
@@ -109,7 +109,7 @@ namespace Chess.Domain
         [Test]
         public void _11_making_an_illegal_move_by_placing_the_black_pawn_on_X_equals_6_and_Y_eqauls_3_and_moving_to_X_equals_4_and_Y_eqauls_3_should_not_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 3, PieceColor.Black);
+            _chessBoard.Add(_pawn, 6, 3);
             _pawn.Move(MovementType.Move, 4, 3);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
@@ -118,7 +118,7 @@ namespace Chess.Domain
         [Test]
         public void _20_making_a_legal_move_by_placing_the_black_pawn_on_X_equals_6_and_Y_eqauls_3_and_moving_to_X_equals_6_and_Y_eqauls_2_should_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 3, PieceColor.Black);
+            _chessBoard.Add(_pawn, 6, 3);
             _pawn.Move(MovementType.Move, 6, 2);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(2));
@@ -142,7 +142,7 @@ namespace Chess.Domain
         [Test]
         public void _01_placing_the_white_pawn_on_X_equals_6_and_Y_equals_1_should_place_the_white_pawn_on_that_place_on_the_board()
         {
-            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _chessBoard.Add(_pawn, 6, 1);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(1));
         }
@@ -150,7 +150,7 @@ namespace Chess.Domain
         [Test]
         public void _10_making_an_illegal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_7_and_Y_eqauls_2_should_not_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _chessBoard.Add(_pawn, 6, 1);
             _pawn.Move(MovementType.Move, 7, 2);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(1));
@@ -159,7 +159,7 @@ namespace Chess.Domain
         [Test]
         public void _11_making_an_illegal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_6_and_Y_eqauls_4_should_not_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _chessBoard.Add(_pawn, 6, 1);
             _pawn.Move(MovementType.Move, 6, 4);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(1));
@@ -168,7 +168,7 @@ namespace Chess.Domain
         [Test]
         public void _12_making_an_illegal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_6_and_Y_eqauls_0_should_not_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _chessBoard.Add(_pawn, 6, 1);
             _pawn.Move(MovementType.Move, 6, 0);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(1));
@@ -177,7 +177,7 @@ namespace Chess.Domain
         [Test]
         public void _20_making_a_legal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_6_and_Y_eqauls_2_should_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _chessBoard.Add(_pawn, 6, 1);
             _pawn.Move(MovementType.Move, 6, 2);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(2));
@@ -186,10 +186,64 @@ namespace Chess.Domain
         [Test]
         public void _21_making_a_legal_move_by_placing_the_white_pawn_on_X_equals_6_and_Y_eqauls_1_and_moving_to_X_equals_6_and_Y_eqauls_3_should_move_the_pawn()
         {
-            _chessBoard.Add(_pawn, 6, 1, PieceColor.White);
+            _chessBoard.Add(_pawn, 6, 1);
             _pawn.Move(MovementType.Move, 6, 3);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(6));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
+        }
+
+
+    }
+
+    [TestFixture]
+    public class When_a_black_pawn_vs_white_pawn
+    {
+        private IChessBoard _chessBoard;
+        private IChessPiece _pawn;
+        private IChessPiece _opponent;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _chessBoard = new ChessBoard();
+            _pawn = new Pawn(PieceColor.Black);
+            _opponent = new Pawn(PieceColor.White);
+        }
+
+        [Test]
+        public void _31_black_vs_white()
+        {
+            _chessBoard.Add(_pawn, 3, 6);
+            _chessBoard.Add(_opponent, 4, 1);
+            Assert.That(_chessBoard.PiecesOnBoard(), Is.EqualTo(2));
+            _pawn.Move(MovementType.Move, 3, 5);
+            _pawn.Move(MovementType.Move, 3, 4);
+            Assert.That(_pawn.XCoordinate, Is.EqualTo(3));
+            Assert.That(_pawn.YCoordinate, Is.EqualTo(4));
+            _opponent.Move(MovementType.Move, 4, 3);
+            Assert.That(_opponent.XCoordinate, Is.EqualTo(4));
+            Assert.That(_opponent.YCoordinate, Is.EqualTo(3));
+            _pawn.Move(MovementType.Capture, 4, 3);
+            Assert.That(_pawn.XCoordinate, Is.EqualTo(4));
+            Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
+            Assert.That(_chessBoard.PiecesOnBoard(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void _32_black_vs_white_enPassant()
+        {
+            _chessBoard.Add(_pawn, 3, 6);
+            _chessBoard.Add(_opponent, 4, 1);
+            Assert.That(_chessBoard.PiecesOnBoard(), Is.EqualTo(2));
+            _pawn.Move(MovementType.Move, 3, 4);
+            _pawn.Move(MovementType.Move, 3, 3);
+            _opponent.Move(MovementType.Move, 4, 3);
+            Assert.That(_opponent.XCoordinate, Is.EqualTo(4));
+            Assert.That(_opponent.YCoordinate, Is.EqualTo(3));
+            _pawn.Move(MovementType.Capture, 4, 2);
+            Assert.That(_pawn.XCoordinate, Is.EqualTo(4));
+            Assert.That(_pawn.YCoordinate, Is.EqualTo(2));
+            Assert.That(_chessBoard.PiecesOnBoard(), Is.EqualTo(1));
         }
 
 
