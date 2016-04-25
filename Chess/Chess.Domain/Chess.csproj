@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessPiece.cs" />
+    <Compile Include="ICaptureMove.cs" />
     <Compile Include="IChessBoard.cs" />
     <Compile Include="IChessPiece.cs" />
     <Compile Include="PieceColor.cs" />

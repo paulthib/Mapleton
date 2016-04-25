@@ -2,7 +2,7 @@
 
 namespace Chess.Domain
 {
-    public class Pawn : ChessPiece
+    public class Pawn : ChessPiece, ICaptureMove
     {
        
         public Pawn(PieceColor pieceColor) : base(pieceColor, false)
@@ -33,21 +33,12 @@ namespace Chess.Domain
             }
         }
 
-        public override void Capture(int newX, int newY)
+        public void Capture(int newX, int newY)
         {
             if (newX == _xCoordinate + 1 && newY == _yCoordinate + (1 * MovementDirection()))
             {
                 _chessBoard.Capture(this, newX, newY);
             }
-        }
-        public override string ToString()
-        {
-            return CurrentPositionAsString();
-        }
-
-        protected override string CurrentPositionAsString()
-        {
-            return string.Format("Current X: {1}{0}Current Y: {2}{0}Piece Color: {3}", Environment.NewLine, XCoordinate, YCoordinate, PieceColor);
         }
 
     }

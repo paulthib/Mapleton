@@ -4,8 +4,3 @@ D:\Mapleton\MhmCodingExercise 3\Chess\Chess.Domain\bin\Debug\nunit.framework.dll
 D:\Mapleton\MhmCodingExercise 3\Chess\Chess.Domain\obj\Debug\Chess.Domain.dll
 D:\Mapleton\MhmCodingExercise 3\Chess\Chess.Domain\obj\Debug\Chess.Domain.pdb
 D:\Mapleton\MhmCodingExercise 3\Chess\Chess.Domain\obj\Debug\Chess.csprojResolveAssemblyReference.cache
-D:\gitrepo\Mapleton\Chess\Chess.Domain\bin\Debug\Chess.Domain.dll
-D:\gitrepo\Mapleton\Chess\Chess.Domain\bin\Debug\Chess.Domain.pdb
-D:\gitrepo\Mapleton\Chess\Chess.Domain\bin\Debug\nunit.framework.dll
-D:\gitrepo\Mapleton\Chess\Chess.Domain\obj\Debug\Chess.Domain.dll
-D:\gitrepo\Mapleton\Chess\Chess.Domain\obj\Debug\Chess.Domain.pdb

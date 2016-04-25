@@ -51,11 +51,11 @@ namespace Chess.Domain
             return CurrentPositionAsString();
         }
 
-        public virtual void Capture(int newX, int newY)
-        {
-            //for most pieces, a move implicitly captures
-            Move(newX, newY);
-        }
+        //public virtual void Capture(int newX, int newY)
+        //{
+        //    //for most pieces, a move implicitly captures
+        //    Move(newX, newY);
+        //}
 
         protected virtual string CurrentPositionAsString()
         {

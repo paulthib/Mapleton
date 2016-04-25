@@ -262,7 +262,7 @@ namespace Chess.Domain
             _opponent.Move(4, 3);
             Assert.That(_opponent.XCoordinate, Is.EqualTo(4));
             Assert.That(_opponent.YCoordinate, Is.EqualTo(3));
-            _pawn.Capture(4, 3);
+            ((Pawn)_pawn).Capture(4, 3);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(4));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
             Assert.That(_chessBoard.PiecesOnBoard(), Is.EqualTo(1));
@@ -280,7 +280,7 @@ namespace Chess.Domain
             _opponent.Move(4, 3);
             Assert.That(_opponent.XCoordinate, Is.EqualTo(4));
             Assert.That(_opponent.YCoordinate, Is.EqualTo(3));
-            _pawn.Capture(4, 2);
+            ((Pawn)_pawn).Capture(4, 2);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(4));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(2));
             Assert.That(_chessBoard.PiecesOnBoard(), Is.EqualTo(1));
@@ -299,7 +299,7 @@ namespace Chess.Domain
             // move will fail, since the the enpassant action was not immediately after opponent move
             Assert.That(_opponent.XCoordinate, Is.EqualTo(4));
             Assert.That(_opponent.YCoordinate, Is.EqualTo(3));
-            _pawn.Capture(4, 2);
+            ((Pawn)_pawn).Capture(4, 2);
             Assert.That(_pawn.XCoordinate, Is.EqualTo(3));
             Assert.That(_pawn.YCoordinate, Is.EqualTo(3));
             Assert.That(_chessBoard.PiecesOnBoard(), Is.EqualTo(2));

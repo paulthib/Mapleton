@@ -8,7 +8,6 @@ namespace Chess.Domain
     public interface IChessPiece
     {
         void Move(int newX, int newY);
-        void Capture(int newX, int newY);
 
         int XCoordinate { get; set; }
         int YCoordinate { get; set; }
